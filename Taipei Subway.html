@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IML 288 Final Project - Taipei Subway Map</title>
+  <style>
+    canvas {
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="subwayCanvas" width="900" height="900"></canvas>
+
+<script>
+  // variables to control which subway lines to show
+  let showBrownLine = false;
+  let showRedLine = false;
+  let showGreenLine = false;
+  let showYellowLine = false;
+  let showBlueLine = false;
+
+  const canvas = document.getElementById("subwayCanvas");
+  const ctx = canvas.getContext("2d");
+
+  function setup() {
+    // Set up initial canvas properties
+    canvas.width = 900;
+    canvas.height = 900;
+    background(255);
+  }
+
+  function draw() {
+    // Draw the subway lines based on the user's selection
+    if (showBrownLine) {
+      drawBrownLine();
+    }
+    if (showRedLine) {
+      drawRedLine();
+    }
+    if (showGreenLine) {
+      drawGreenLine();
+    }
+    if (showYellowLine) {
+      drawYellowLine();
+    }
+    if (showBlueLine) {
+      drawBlueLine();
+    }
+
+    // Draw the legend
+    drawLegend();
+    // Draw "Taipei" and "Subway Map" text
+    drawTpe();
+    // Draw the "click" indicator
+    drawClick();
+  }
+
+  // Function to draw the brown line
+  function drawBrownLine() {
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = "#C19D25";
+    ctx.beginPath();
+    ctx.moveTo(650, 300);
+    ctx.lineTo(650, 500);
+    ctx.lineTo(580, 250);
+    ctx.lineTo(400, 250);
+    ctx.lineTo(400, 650);
+    ctx.lineTo(490, 650);
+    ctx.lineTo(490, 700);
+    ctx.lineTo(600, 700);
+    ctx.stroke();
+  }
+
+  // Similar functions for other lines
+
+  // Function to draw the legend
+  function drawLegend() {
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "#000";
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(400, 20, 400, 210);
+
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText("Legend", 420, 50);
+
+    // Draw legend boxes and text
+    // ...
+
+  }
+
+  // Function for the Taipei subway map text
+  function drawTpe() {
+    ctx.font = "80px Arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText("Taipei", 650, 740);
+
+    ctx.font = "80px Arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText("Subway Map", 430, 850);
+  }
+
+  // Function for the click arrow
+  function drawClick() {
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000";
+    ctx.beginPath();
+    ctx.moveTo(750, 150);
+    ctx.lineTo(750, 300);
+    ctx.lineTo(730, 280);
+    ctx.moveTo(750, 300);
+    ctx.lineTo(770, 280);
+    ctx.stroke();
+
+    ctx.font = "40px Arial";
+    ctx.fillStyle = "#000";
+    ctx.fillText("click", 715, 340);
+  }
+
+  // Function to reset show variables
+  function resetShowVariables() {
+    showBrownLine = false;
+    showRedLine = false;
+    showGreenLine = false;
+    showYellowLine = false;
+    showBlueLine = false;
+  }
+
+  // Handle mouse click
+  canvas.addEventListener("click", function (event) {
+    resetShowVariables();
+
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    // Determine which legend box was clicked
+    if (mouseX >= 420 && mouseX <= 590 && mouseY >= 60 && mouseY <= 90) {
+      showBrownLine = true;
+    } else if (mouseX >= 420 && mouseX <= 590 && mouseY >= 120 && mouseY <= 150) {
+      showRedLine = true;
+    } else if (mouseX >= 420 && mouseX <= 590 && mouseY >= 180 && mouseY <= 210) {
+      showGreenLine = true;
+    } else if (mouseX >= 610 && mouseX <= 780 && mouseY >= 60 && mouseY <= 90) {
+      showYellowLine = true;
+    } else if (mouseX >= 610 && mouseX <= 780 && mouseY >= 120 && mouseY <= 150) {
+      showBlueLine = true;
+    }
+  });
+
+  // Initial setup
+  setup();
+  // Start drawing
+  requestAnimationFrame(draw);
+</script>
+
+</body>
+</html>
+
+
+
+    
+
+     
