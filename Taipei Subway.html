@@ -3,38 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <title>IML 288 Final Project - Taipei Subway Map</title>
-  <style>
-    canvas {
-      display: block;
-      margin: auto;
-    }
-  </style>
 </head>
 <body>
 
-<canvas id="subwayCanvas" width="900" height="900"></canvas>
-
 <script>
-  // variables to control which subway lines to show
+  // IML 288 Final Project
+  // Tiffany Lo 
+  // Taipei Subway Map
+  // ChatGPT was used as assistance in finding the exact borders for mousepressed 
+
+  //variables to control which subway lines to show 
   let showBrownLine = false;
   let showRedLine = false;
   let showGreenLine = false;
   let showYellowLine = false;
   let showBlueLine = false;
 
-  const canvas = document.getElementById("subwayCanvas");
-  const ctx = canvas.getContext("2d");
-
   function setup() {
-    // Set up initial canvas properties
-    canvas.width = 900;
-    canvas.height = 900;
+    //background size 
+    createCanvas(900, 900);
+    //white background 
     background(255);
   }
 
   function draw() {
-    // Draw the subway lines based on the user's selection
+    //draw the subway lines based on the user's selection 
     if (showBrownLine) {
       drawBrownLine();
     }
@@ -51,96 +46,163 @@
       drawBlueLine();
     }
 
-    // Draw the legend
+    //draw the legend 
     drawLegend();
-    // Draw "Taipei" and "Subway Map" text
+    //draw "Taipei" and "Subway Map" text 
     drawTpe();
-    // Draw the "click" indicator
+    //draw the "click" indicator 
     drawClick();
   }
 
-  // Function to draw the brown line
+  //function to draw the brown line 
   function drawBrownLine() {
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = "#C19D25";
-    ctx.beginPath();
-    ctx.moveTo(650, 300);
-    ctx.lineTo(650, 500);
-    ctx.lineTo(580, 250);
-    ctx.lineTo(400, 250);
-    ctx.lineTo(400, 650);
-    ctx.lineTo(490, 650);
-    ctx.lineTo(490, 700);
-    ctx.lineTo(600, 700);
-    ctx.stroke();
+    strokeWeight(10);
+    stroke('#C19D25');
+    line(650, 300, 650, 500);
+    line(650, 300, 580, 250);
+    line(580, 250, 400, 250);
+    line(400, 250, 400, 650);
+    line(400, 650, 490, 650);
+    line(490, 650, 490, 700);
+    line(490, 700, 600, 700);
   }
 
-  // Similar functions for other lines
+  //function to draw red line 
+  function drawRedLine() {
+    strokeWeight(10);
+    stroke('#F51E1E');
+    line(40, 30, 70, 70);
+    line(70, 70, 70, 95);
+    line(70, 95, 160, 95);
+    line(160, 95, 240, 160);
+    line(240, 160, 240, 560);
+    line(240, 560, 540, 560);
+  }
 
-  // Function to draw the legend
+  //function to draw green line 
+  function drawGreenLine() {
+    strokeWeight(10);
+    stroke('#079018');
+    line(360, 850, 360, 700);
+    line(360, 700, 240, 560);
+    line(240, 560, 170, 560);
+    line(170, 560, 170, 400);
+    line(170, 400, 570, 400);
+  }
+
+  //function to draw yellow line 
+  function drawYellowLine() {
+    strokeWeight(10);
+    stroke('#FFD83B');
+    line(150, 750, 150, 720);
+    line(150, 720, 320, 545);
+    line(150, 720, 320, 545);
+    line(320, 545, 320, 330);
+    line(320, 330, 200, 330);
+    line(200, 330, 50, 200);
+    line(200, 330, 10, 500);
+  }
+
+  //function to draw blue line 
+  function drawBlueLine() {
+    strokeWeight(10);
+    stroke('#2B60ED');
+    line(50, 850, 70, 810);
+    line(70, 810, 70, 620);
+    line(70, 620, 175, 500);
+    line(175, 500, 650, 500);
+  }
+
+  //function to draw the legend 
   function drawLegend() {
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = "#000";
-    ctx.fillStyle = "#FFF";
-    ctx.fillRect(400, 20, 400, 210);
+    strokeWeight(5);
+    stroke(0);
+    fill(255);
+    rect(400, 20, 400, 210);
 
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "#000";
-    ctx.fillText("Legend", 420, 50);
+    textSize(20);
+    fill(0);
+    text("Legend", 420, 50);
 
-    // Draw legend boxes and text
-    // ...
+    //brown box
+    fill('#C19D25');
+    noStroke();
+    rect(420, 60, 170, 30);
+    textSize(15);
+    fill(255);
+    text("1  Wenhu Line", 430, 80);
 
+    //red box
+    fill('#F51E1E');
+    noStroke();
+    rect(420, 120, 170, 30);
+    textSize(15);
+    fill(255);
+    text("2  Tamsui-Xinyi Line", 430, 140);
+
+    //green box
+    fill('#079018');
+    noStroke();
+    rect(420, 180, 170, 30);
+    textSize(15);
+    fill(255);
+    text("3  Songshan-Xindian Line", 430, 200);
+
+    //yellow box
+    fill('#FFD83B');
+    noStroke();
+    rect(610, 60, 170, 30);
+    textSize(15);
+    fill(255);
+    text("4  Zhongshe-Xinhu Line", 620, 80);
+
+    //blue box
+    fill('#2B60ED');
+    noStroke();
+    rect(610, 120, 170, 30);
+    textSize(15);
+    fill(255);
+    text("5  Bannan Line", 620, 140);
   }
 
-  // Function for the Taipei subway map text
+  //function for the Taipei subway map text 
   function drawTpe() {
-    ctx.font = "80px Arial";
-    ctx.fillStyle = "#000";
-    ctx.fillText("Taipei", 650, 740);
+    textSize(80);
+    fill(0);
+    text("Taipei", 650, 740);
 
-    ctx.font = "80px Arial";
-    ctx.fillStyle = "#000";
-    ctx.fillText("Subway Map", 430, 850);
+    textSize(80);
+    fill(0);
+    text("Subway Map", 430, 850);
   }
 
-  // Function for the click arrow
+  //function for the click arrow 
   function drawClick() {
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "#000";
-    ctx.beginPath();
-    ctx.moveTo(750, 150);
-    ctx.lineTo(750, 300);
-    ctx.lineTo(730, 280);
-    ctx.moveTo(750, 300);
-    ctx.lineTo(770, 280);
-    ctx.stroke();
-
-    ctx.font = "40px Arial";
-    ctx.fillStyle = "#000";
-    ctx.fillText("click", 715, 340);
+  stroke(0);
+  strokeWeight(2);  // Adjust this value to make the text thinner
+  line(width * 0.75, height * 0.15, width * 0.75, height * 0.3);
+  line(width * 0.75, height * 0.3, width * 0.73, height * 0.28);
+  line(width * 0.75, height * 0.3, width * 0.77, height * 0.28);
+  textSize(width * 0.04);
+  fill(0);
+  text("click", width * 0.715, height * 0.34);
   }
 
-  // Function to reset show variables
-  function resetShowVariables() {
+  function mousePressed() {
+    //reset all show variables to false
     showBrownLine = false;
     showRedLine = false;
     showGreenLine = false;
     showYellowLine = false;
     showBlueLine = false;
-  }
 
-  // Handle mouse click
-  canvas.addEventListener("click", function (event) {
-    resetShowVariables();
+    //determine which legend box was clicked and set the corresponding show variable to true
 
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    // Determine which legend box was clicked
+    //check if mouse click is within the boundaries of the brown line legend box
     if (mouseX >= 420 && mouseX <= 590 && mouseY >= 60 && mouseY <= 90) {
+      //show brown line
       showBrownLine = true;
+      //same concept as above   
     } else if (mouseX >= 420 && mouseX <= 590 && mouseY >= 120 && mouseY <= 150) {
       showRedLine = true;
     } else if (mouseX >= 420 && mouseX <= 590 && mouseY >= 180 && mouseY <= 210) {
@@ -150,12 +212,7 @@
     } else if (mouseX >= 610 && mouseX <= 780 && mouseY >= 120 && mouseY <= 150) {
       showBlueLine = true;
     }
-  });
-
-  // Initial setup
-  setup();
-  // Start drawing
-  requestAnimationFrame(draw);
+  }
 </script>
 
 </body>
@@ -163,6 +220,5 @@
 
 
 
-    
 
-     
+
